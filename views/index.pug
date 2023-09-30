@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
+  each category in categories
+    ul
+      li
+        a(href=category.url)= category.name
+
+  h2 Items almost out of stock:
+  each item in itemsAlmostOutOfStock
+    ul
+      li
+        a(href=item.url)= item.name
