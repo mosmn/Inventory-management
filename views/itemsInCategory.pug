@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 #{category.name}
+
+  .sidebar
+    h2 Categories
+    ul
+      each category in categories
+        li
+          a(href=category.url)= category.name
+
+  .items-in-category
+    h2 Items in #{category.name}
+    ul.item-list
+      each item in items
+        li.item-card
+          a.item-link(href=item.url)
+            img.item-image(src=item.image, alt=item.name)
+            h3.item-name= item.name
+            p.item-price $#{item.price.toFixed(2)}

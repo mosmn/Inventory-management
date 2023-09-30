@@ -6,10 +6,13 @@ const asyncHandler = require("express-async-handler");
 exports.homePage = asyncHandler(async (req, res) => {
     const categories = await Category.find({});
     const itemsAlmostOutOfStock = await Item.find({number_in_stock: {$lte: 30}}).populate('category');
-    res.render('index', { title: 'GrocifyPro', categories, itemsAlmostOutOfStock });
+    res.render('index', {categories, itemsAlmostOutOfStock });
 });
 
-exports.getAllCategories = asyncHandler(async (req, res) => {
+exports.getItemsInCategory = asyncHandler(async (req, res) => {
+    const category = await Category.findById(req.params.id);
     const categories = await Category.find({});
-    res.render('innerlayout', {categories});
+    const items = await Item.find({category: req.params.id});
+    res.render('itemsInCategory', {category, categories, items});
 });
+

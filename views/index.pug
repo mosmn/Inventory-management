@@ -1,15 +1,16 @@
 extends layout
 
 block content
-  h1= title
+  .grid-container
+    each category in categories
+      a(href=category.url, class='category-card')
+        img(src=category.image, alt=category.name)
+        h3= category.name
 
-  each category in categories
-    ul
-      li
-        a(href=category.url)= category.name
-
-  h2 Items almost out of stock:
-  each item in itemsAlmostOutOfStock
-    ul
-      li
-        a(href=item.url)= item.name
+    h2 Items almost out of stock:
+    each item in itemsAlmostOutOfStock
+      a(href=item.url, class='item-card')
+        img(src=item.image, alt=item.name)
+        h3= item.name
+        p Stock: #{item.number_in_stock}
+        p Price: $#{item.price.toFixed(2)}
