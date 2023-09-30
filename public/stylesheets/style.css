@@ -155,3 +155,53 @@ a {
   color: #754c29;
   text-decoration: none;
 }
+/* Add these styles to your existing CSS */
+/* item.pug styles */
+.item-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.item-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.item-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.item-description {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.item-category,
+.item-price,
+.item-stock {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #754c29;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #6a421f;
+}
