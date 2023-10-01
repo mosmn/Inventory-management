@@ -21,4 +21,4 @@ block content
                 img.item-image(src=`/images/${item.image}`, alt=item.name)
                 h3.item-name= item.name
                 p.item-price $#{item.price.toFixed(2)}
-        button.btn.btn-primary(type='button', onclick='window.location.href="/catalog/items/add-new"') Add Item
+        a(href='/catalog/items/add-new', class='btn btn-primary') Add Item
