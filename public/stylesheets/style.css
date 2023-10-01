@@ -26,9 +26,12 @@ body {
   line-height: 1.6em;
   margin: 0;
   padding: 0;
+  position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column; /* Ensure body occupies the full viewport height */
+}
+
+.main-container {
+  padding-bottom: 3.5rem;
 }
 
 header {
@@ -46,11 +49,8 @@ header {
 
 .profile-icon img {
   max-width: 40px;
-}
-
-/* Add flex-grow property to the content to push the footer to the bottom */
-.block.content {
-  flex-grow: 1;
+  border-radius: 50%;
+  border: 2px solid #754c29;
 }
 
 footer {
@@ -58,15 +58,19 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem; 
 }
 
 
 /* index.pug styles */
-.grid-container {
+.cats,
+.items-almost-out-of-stock {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  margin-top: 20px;
 }
 
 .category-card,
@@ -108,10 +112,26 @@ a {
   text-decoration: none;
 }
 
-/* Add these styles to your existing CSS */
-/* index.pug styles */
+/* items-in-category.pug styles */
+.catpage-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.sidebar {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 20px;
+  list-style: none;
+}
+
 .items-in-category {
-  margin-top: 20px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 }
 
 .item-list {
@@ -144,18 +164,19 @@ a {
 .item-name {
   font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .item-price {
-  margin-top: 5px;
   font-size: 1rem;
+  margin-top: 5px;
 }
 
 .item-link {
   color: #754c29;
   text-decoration: none;
 }
-/* Add these styles to your existing CSS */
+
 /* item.pug styles */
 .item-details {
   max-width: 800px;
@@ -203,5 +224,52 @@ a {
 }
 
 .btn:hover {
+  background-color: #6a421f;
+}
+
+/* addNewCategory.pug styles */
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.alert.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+button[type='submit'] {
+  background-color: #754c29;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type='submit']:hover {
   background-color: #6a421f;
 }
