@@ -5,7 +5,6 @@ const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 const path = require("path");
 
-// Multer configuration for image uploads
 const storage = multer.diskStorage({
   destination: "public/images/",
   filename: (req, file, cb) => {
