@@ -16,7 +16,7 @@ block content
     
     .form-group
       label(for='description') Description:
-      textarea#description.form-control(name='description', rows='4', value=(undefined===category ? '' : category.description))
+      textarea#description.form-control(name='description', rows='4' )= (undefined===category ? '' : category.description)
 
     .form-group
       label(for='image') Image:

@@ -5,18 +5,7 @@ const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: "public/images/",
-  filename: (req, file, cb) => {
-    const fileExtension = path.extname(file.originalname);
-
-    const uniqueFilename = Date.now() + "-" + Math.round(Math.random() * 1e9);
-
-    const finalFilename = uniqueFilename + fileExtension;
-
-    cb(null, finalFilename);
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
@@ -25,6 +14,7 @@ exports.homePage = asyncHandler(async (req, res) => {
   const itemsAlmostOutOfStock = await Item.find({
     number_in_stock: { $lte: 30 },
   }).populate("category");
+  
   res.render("index", { categories, itemsAlmostOutOfStock });
 });
 
@@ -42,14 +32,6 @@ exports.getAddNewCategory = asyncHandler(async (req, res) => {
 exports.postAddNewCategory = [
   upload.single("image"),
 
-  (req, res, next) => {
-    if (!req.file) {
-      // No image file uploaded
-      req.fileValidationError = "Image is required.";
-    }
-    next();
-  },
-
   body("name", "Category name required").trim().isLength({ min: 1 }).escape(),
 
   asyncHandler(async (req, res) => {
@@ -58,10 +40,10 @@ exports.postAddNewCategory = [
     const category = new Category({
       name: req.body.name,
       description: req.body.description,
-      image: req.file ? req.file.filename : undefined,
+      image: req.file ? req.file.buffer : undefined, // Store image binary data
     });
 
-    if (!errors.isEmpty() || req.fileValidationError) {
+    if (!errors.isEmpty()) {
       res.render("addNewCategory", {
         title: "Add new category",
         category,
@@ -104,30 +86,25 @@ exports.getUpdateCategory = asyncHandler(async (req, res) => {
 exports.postUpdateCategory = [
   upload.single("image"),
 
-  (req, res, next) => {
-    if (!req.file) {
-      // No image file uploaded
-      req.fileValidationError = "Image is required.";
-    }
-    next();
-  },
-
   body("name", "Category name required").trim().isLength({ min: 1 }).escape(),
 
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
 
-    const category = new Category({
+    const updatedCategory = {
       name: req.body.name,
       description: req.body.description,
-      image: req.file ? req.file.filename : undefined,
-      _id: req.params.id,
-    });
+      // image: req.file ? req.file.buffer : undefined,
+    };
 
-    if (!errors.isEmpty() || req.fileValidationError) {
+    if (req.file) {
+      updatedCategory.image = req.file.buffer; // Store updated image binary data
+    }
+
+    if (!errors.isEmpty()) {
       res.render("addNewCategory", {
         title: "Update category",
-        category,
+        category: updatedCategory,
         errors: errors.array(),
       });
     } else {
@@ -137,8 +114,8 @@ exports.postUpdateCategory = [
       if (categoryExists) {
         res.redirect(categoryExists.url);
       } else {
-        await Category.findByIdAndUpdate(req.params.id, category);
-        res.redirect(category.url);
+        await Category.findByIdAndUpdate(req.params.id, updatedCategory);
+        res.redirect(updatedCategory.url);
       }
     }
   }),
