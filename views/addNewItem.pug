@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+
+  if errors
+    .alert.alert-danger
+      ul
+        each error in errors
+          li= error.msg
+
+  form(method='POST', action='', enctype="multipart/form-data")
+    .form-group
+      label(for='name') Item Name:
+      input#name.form-control(type='text', name='name', value=(undefined===item ? '' : item.name))
+    
+    .form-group
+      label(for='description') Description:
+      textarea#description.form-control(name='description', rows='4', value=(undefined===item ? '' : item.description))
+
+    .form-group
+      label(for='category') Category:
+      select#category.form-control(name='category')
+        each category in categories
+          option(value=category._id, selected=(undefined!==item && item.category.toString()===category._id.toString()))= category.name
+
+    .form-group
+      label(for='price') Price:
+      input#price.form-control(type='number', name='price', step='0.01', min='0.01', value=(undefined===item ? '' : item.price))
+    
+    .form-group
+      label(for='number_in_stock') Number in Stock:
+      input#number_in_stock.form-control(type='number', name='number_in_stock', min='0', value=(undefined===item ? '' : item.number_in_stock))
+
+    .form-group
+      label(for='image') Image:
+      input#image.form-control(type='file', name='image', accept='.jpg, .jpeg, .png')
+    
+    if isUpdate
+        img(src=`/images/${item.image}`, alt=item.name, class='current-image')
+
+    button.btn.btn-primary(type='submit')= isUpdate ? 'Update Item' : 'Create Item'

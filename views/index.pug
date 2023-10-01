@@ -1,16 +1,18 @@
 extends layout
 
 block content
-  .grid-container
+  .cats
     each category in categories
       a(href=category.url, class='category-card')
-        img(src=category.image, alt=category.name)
+        img(src=`/images/${category.image}`, alt=category.name)
         h3= category.name
+    button.btn.btn-primary(type='button', onclick='window.location.href="/catalog/category/add-new"') Add Category
 
-    h2 Items almost out of stock:
+  h2 Items almost out of stock
+  .items-almost-out-of-stock
     each item in itemsAlmostOutOfStock
       a(href=item.url, class='item-card')
-        img(src=item.image, alt=item.name)
+        img(src=`/images/${item.image}`, alt=item.name)
         h3= item.name
         p Stock: #{item.number_in_stock}
         p Price: $#{item.price.toFixed(2)}

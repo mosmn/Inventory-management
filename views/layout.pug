@@ -4,14 +4,15 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    header
-      a(href='/')
-        .logo
-          img(src='/images/logo.png', alt='Your Logo')
-      .profile-icon
-        a(href='#')
-          img(src='/images/profile-icon.png', alt='Profile Icon')
-    block content
+    .main-container
+      header
+        a(href='/')
+          .logo
+            img(src='/images/logo.png', alt='Your Logo')
+        .profile-icon
+          a(href='#')
+            img(src='/images/profile-icon.png', alt='Profile Icon')
+      block content
 
     footer
       p © 2023 GrocifyPro
