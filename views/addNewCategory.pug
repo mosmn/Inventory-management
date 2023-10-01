@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+
+  if errors
+    .alert.alert-danger
+      ul
+        each error in errors
+          li= error.msg
+
+  form(method='POST', action='', enctype="multipart/form-data")
+    .form-group
+      label(for='name') Category Name:
+      input#name.form-control(type='text', name='name', value=(undefined===category ? '' : category.name))
+    
+    .form-group
+      label(for='description') Description:
+      textarea#description.form-control(name='description', rows='4', value=(undefined===category ? '' : category.description))
+
+    .form-group
+      label(for='image') Image:
+      input#image.form-control(type='file', name='image', accept='.jpg, .png, .jpeg')
+      
+      if isUpdate
+        img(src=`/images/${category.image}`, alt=category.name, class='current-image')
+
+    button.btn.btn-primary(type='submit')= isUpdate ? 'Update Category' : 'Create Category'
