@@ -28,9 +28,9 @@ router.post(
 //item routes
 router.get("/item/:id", item_controller.getItem);
 
-router.get("/items/add-new", item_controller.getAddNewItem);
+router.get("/category/:id/items/add-new-item", item_controller.getAddNewItem);
 
-router.post("/items/add-new", item_controller.postAddNewItem);
+router.post("/category/:id/items/add-new-item", item_controller.postAddNewItem);
 
 router.get("/item/:id/update", item_controller.getUpdateItem);
 

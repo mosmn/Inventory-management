@@ -15,8 +15,16 @@ exports.getItem = asyncHandler(async (req, res) => {
 });
 
 exports.getAddNewItem = asyncHandler(async (req, res) => {
-  const categories = await Category.find();
-  res.render("addNewItem", { title: "Add New Item", categories });
+  const [categories, currentCategory] = await Promise.all([
+    Category.find(),
+    Category.findById(req.params.id),
+  ]);
+
+  res.render("addNewItem", {
+    title: "Add New Item",
+    categories,
+    currentCategory,
+  });
 });
 
 exports.postAddNewItem = [

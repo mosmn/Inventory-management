@@ -22,7 +22,7 @@ block content
       label(for='category') Category:
       select#category.form-control(name='category')
         each category in categories
-          option(value=category._id, selected=(undefined!==item && item.category.toString()===category._id.toString()))= category.name
+          option(value=category._id, selected=(undefined===item ? currentCategory.id==category._id : item.category._id==category._id))= category.name
 
     .form-group
       label(for='price') Price:

@@ -24,4 +24,4 @@ block content
                     img(src='/images/default-image.jpg', alt=item.name)
                 h3.item-name= item.name
                 p.item-price $#{item.price.toFixed(2)}
-        a(href='/catalog/items/add-new', class='btn btn-primary') Add Item
+        a(href=`${category.url}/add-new-item`, class='btn btn-primary') Add Item
