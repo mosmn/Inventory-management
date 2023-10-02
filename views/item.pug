@@ -2,7 +2,10 @@ extends layout
 
 block content
   .item-details
-    img.item-image(src=`/images/${item.image}`, alt=item.name)
+    if item.image
+      img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
+    else
+      img(src='/images/default-image.jpg', alt=item.name)
     h1.item-name= item.name
     p.item-description= item.description
     p.item-category Category: #{item.category.name}

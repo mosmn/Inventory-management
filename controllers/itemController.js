@@ -5,15 +5,7 @@ const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 const path = require("path");
 
-const storage = multer.diskStorage({
-  destination: "public/images/",
-  filename: (req, file, cb) => {
-    const uniqueFilename = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const fileExtension = path.extname(file.originalname);
-    const finalFilename = uniqueFilename + fileExtension;
-    cb(null, finalFilename);
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
@@ -32,7 +24,6 @@ exports.postAddNewItem = [
 
   (req, res, next) => {
     if (!req.file) {
-      // No image file uploaded
       req.fileValidationError = "Image is required.";
     }
     next();
@@ -56,7 +47,7 @@ exports.postAddNewItem = [
       category: req.body.category,
       price: req.body.price,
       number_in_stock: req.body.number_in_stock,
-      image: req.file ? req.file.filename : undefined,
+      image: req.file ? req.file.buffer : undefined,
     });
 
     if (!errors.isEmpty() || req.fileValidationError) {
@@ -68,7 +59,6 @@ exports.postAddNewItem = [
         errors: errors.array(),
       });
     } else {
-      // Save the item to the database
       await item.save();
       res.redirect(item.url);
     }
@@ -101,14 +91,6 @@ exports.getUpdateItem = asyncHandler(async (req, res) => {
 exports.postUpdateItem = [
   upload.single("image"),
 
-  (req, res, next) => {
-    if (!req.file) {
-      // No image file uploaded
-      req.fileValidationError = "Image is required.";
-    }
-    next();
-  },
-
   body("name", "Item name required").trim().isLength({ min: 1 }).escape(),
   body("description", "Description required")
     .trim()
@@ -127,11 +109,14 @@ exports.postUpdateItem = [
       category: req.body.category,
       price: req.body.price,
       number_in_stock: req.body.number_in_stock,
-      image: req.file ? req.file.filename : undefined,
       _id: req.params.id,
     });
 
-    if (!errors.isEmpty() || req.fileValidationError) {
+    if (req.file) {
+      item.image = req.file.buffer;
+    }
+
+    if (!errors.isEmpty()) {
       const categories = await Category.find();
       res.render("addNewItem", {
         title: "Update Item",

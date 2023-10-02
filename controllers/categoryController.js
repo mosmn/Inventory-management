@@ -14,7 +14,7 @@ exports.homePage = asyncHandler(async (req, res) => {
   const itemsAlmostOutOfStock = await Item.find({
     number_in_stock: { $lte: 30 },
   }).populate("category");
-  
+
   res.render("index", { categories, itemsAlmostOutOfStock });
 });
 
@@ -40,7 +40,7 @@ exports.postAddNewCategory = [
     const category = new Category({
       name: req.body.name,
       description: req.body.description,
-      image: req.file ? req.file.buffer : undefined, // Store image binary data
+      image: req.file ? req.file.buffer : undefined,
     });
 
     if (!errors.isEmpty()) {
@@ -94,11 +94,10 @@ exports.postUpdateCategory = [
     const updatedCategory = {
       name: req.body.name,
       description: req.body.description,
-      // image: req.file ? req.file.buffer : undefined,
     };
 
     if (req.file) {
-      updatedCategory.image = req.file.buffer; // Store updated image binary data
+      updatedCategory.image = req.file.buffer;
     }
 
     if (!errors.isEmpty()) {
@@ -108,15 +107,8 @@ exports.postUpdateCategory = [
         errors: errors.array(),
       });
     } else {
-      const categoryExists = await Category.findOne({ name: req.body.name })
-        .collation({ locale: "en", strength: 2 })
-        .exec();
-      if (categoryExists) {
-        res.redirect(categoryExists.url);
-      } else {
-        await Category.findByIdAndUpdate(req.params.id, updatedCategory);
-        res.redirect(updatedCategory.url);
-      }
+      await Category.findByIdAndUpdate(req.params.id, updatedCategory);
+      res.redirect(updatedCategory.url);
     }
   }),
 ];

@@ -18,7 +18,10 @@ block content
     .items-in-category
         each item in items
             a(href=item.url, class='item-card')
-                img.item-image(src=`/images/${item.image}`, alt=item.name)
+                if item.image
+                  img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
+                else
+                    img(src='/images/default-image.jpg', alt=item.name)
                 h3.item-name= item.name
                 p.item-price $#{item.price.toFixed(2)}
         a(href='/catalog/items/add-new', class='btn btn-primary') Add Item
