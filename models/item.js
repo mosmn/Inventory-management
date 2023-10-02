@@ -15,12 +15,4 @@ ItemSchema.virtual("url").get(function () {
   return "/catalog/item/" + this._id;
 });
 
-ItemSchema.virtual("price_formatted").get(function () {
-  return "$" + this.price;
-});
-
-ItemSchema.virtual("number_in_stock_formatted").get(function () {
-  return this.number_in_stock + " in stock";
-});
-
 module.exports = mongoose.model("Item", ItemSchema);

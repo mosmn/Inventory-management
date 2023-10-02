@@ -9,7 +9,7 @@ block content
         each error in errors
           li= error.msg
 
-  form(method='POST', action='', enctype="multipart/form-data")
+  form(method='POST', action='', enctype="multipart/form-data").formcont
     .form-group
       label(for='name') Category Name:
       input#name.form-control(type='text', name='name', value=(undefined===category ? '' : category.name))
@@ -23,6 +23,6 @@ block content
       input#image.form-control(type='file', name='image', accept='.jpg, .png, .jpeg')
       
       if isUpdate
-        img(src=`/images/${category.image}`, alt=category.name, class='current-image')
+        img(src=`data:image/jpeg;base64,${category.image.toString('base64')}`, alt=category.name).category-image
 
     button.btn.btn-primary(type='submit')= isUpdate ? 'Update Category' : 'Create Category'

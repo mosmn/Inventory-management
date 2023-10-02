@@ -5,20 +5,21 @@ block content
     each category in categories
       a(href=category.url, class='category-card')
         if category.image
-          img(src=`data:image/jpeg;base64,${category.image.toString('base64')}`, alt=category.name)
+          img(src=`data:image/jpeg;base64,${category.image.toString('base64')}`, alt=category.name).category-image
         else
-          img(src='/images/default-image.jpg', alt=category.name)
+          img(src='/images/default-image.jpg', alt=category.name).category-image
         h3= category.name
-    a(href='/catalog/category/add-new', class='btn btn-primary') Add Category
+    a(href='/catalog/category/add-new', class='btn btn-primary').prim-btn Add Category
 
-  h2 Items almost out of stock
-  .items-almost-out-of-stock
-    each item in itemsAlmostOutOfStock
-      a(href=item.url, class='item-card')
-        if item.image
-          img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
-        else
-          img(src='/images/default-image.jpg', alt=item.name)
-        h3= item.name
-        p Stock: #{item.number_in_stock}
-        p Price: $#{item.price.toFixed(2)}
+  .its
+    h2 Items almost out of stock
+    .items-almost-out-of-stock
+      each item in itemsAlmostOutOfStock
+        a(href=item.url, class='item-card')
+          if item.image
+            img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name).item-image
+          else
+            img(src='/images/default-image.jpg', alt=item.name).item-image
+          h3= item.name
+          p Stock: #{item.number_in_stock}
+          p Price: $#{item.price.toFixed(2)}

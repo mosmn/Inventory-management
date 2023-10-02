@@ -9,14 +9,14 @@ block content
         each error in errors
           li= error.msg
 
-  form(method='POST', action='', enctype="multipart/form-data")
+  form(method='POST', action='', enctype="multipart/form-data").formcont
     .form-group
       label(for='name') Item Name:
       input#name.form-control(type='text', name='name', value=(undefined===item ? '' : item.name))
     
     .form-group
       label(for='description') Description:
-      textarea#description.form-control(name='description', rows='4', value=(undefined===item ? '' : item.description))
+      textarea#description.form-control(name='description', rows='4')= (undefined===item ? '' : item.description)
 
     .form-group
       label(for='category') Category:
@@ -37,6 +37,6 @@ block content
       input#image.form-control(type='file', name='image', accept='.jpg, .jpeg, .png')
     
     if isUpdate
-        img(src=`/images/${item.image}`, alt=item.name, class='current-image')
+        img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name).item-image
 
     button.btn.btn-primary(type='submit')= isUpdate ? 'Update Item' : 'Create Item'

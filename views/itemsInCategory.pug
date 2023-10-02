@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  h2 Items in #{category.name}
+  .catpage-header
+    h2 Items in #{category.name}
+    a(href=`${category.url}/update`, class='btn btn-primary') Update Category
     form(method='POST', action=`${category.url}/delete`)
-        button.btn.btn-danger(type='submit') Delete Category
-
-    button.btn.btn-primary(type='button', onclick=`window.location.href="${category.url}/update"`) Update Category
+        button.btn-danger(type='submit') Delete Category
 
   .catpage-container
     .sidebar
@@ -19,9 +19,9 @@ block content
         each item in items
             a(href=item.url, class='item-card')
                 if item.image
-                  img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
+                  img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name).item-image
                 else
-                    img(src='/images/default-image.jpg', alt=item.name)
+                    img(src='/images/default-image.jpg', alt=item.name).item-image
                 h3.item-name= item.name
                 p.item-price $#{item.price.toFixed(2)}
-        a(href=`${category.url}/add-new-item`, class='btn btn-primary') Add Item
+        a(href=`${category.url}/add-new-item`, class='btn btn-primary').prim-btn Add Item

@@ -122,6 +122,8 @@ exports.postUpdateItem = [
 
     if (req.file) {
       item.image = req.file.buffer;
+    } else {
+      item.image = await Item.findById(req.params.id).select("image");
     }
 
     if (!errors.isEmpty()) {
