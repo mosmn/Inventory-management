@@ -38,4 +38,6 @@ router.post("/item/:id/update", item_controller.postUpdateItem);
 
 router.post("/item/:id/delete", item_controller.postDeleteItem);
 
+router.get("/search", item_controller.getSearchResults);
+
 module.exports = router;

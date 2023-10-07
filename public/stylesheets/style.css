@@ -345,3 +345,28 @@ button[type='submit'].btn-danger {
 button[type='submit'].btn-danger:hover {
   background-color: #c82333;
 }
+
+.search form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search input:focus {
+  border: 1px solid #00A79D;
+}
+
+.search img {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}

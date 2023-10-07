@@ -15,4 +15,7 @@ ItemSchema.virtual("url").get(function () {
   return "/catalog/item/" + this._id;
 });
 
+// dynamic mapping
+ItemSchema.index({ "$**": "text" });
+
 module.exports = mongoose.model("Item", ItemSchema);

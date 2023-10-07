@@ -141,3 +141,17 @@ exports.postUpdateItem = [
     }
   }),
 ];
+
+exports.getSearchResults = asyncHandler(async (req, res) => {
+  const searchQuery = req.query.q;
+  console.log(searchQuery);
+
+  if (!searchQuery) {
+    res.render("searchResults", { items: [] });
+    return;
+  }
+
+  const items = await Item.find({ $text: { $search: searchQuery } }).exec();
+
+  res.render("searchResults", { items });
+});

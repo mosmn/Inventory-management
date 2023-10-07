@@ -9,6 +9,11 @@ html
         a(href='/')
           .logo
             img(src='/images/logo.png', alt='Your Logo')
+        .search
+          form(action="/catalog/search", method="GET")
+            input(type="search", name="q", placeholder="Search...")
+            button(type="submit")
+              img(src='/images/search-icon.png', alt='Search Icon')
         .profile-icon
           a(href='#')
             img(src='/images/profile-icon.png', alt='Profile Icon')

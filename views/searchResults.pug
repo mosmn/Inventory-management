@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Search Results
+  if items.length > 0
+    ul
+      each item in items
+        li
+          a(href=item.url)
+            if item.image
+                img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
+            else
+                img(src='/images/default-image.jpg', alt=item.name)
+            h3= item.name
+            p.item-description= item.description
+            p.item-price $#{item.price.toFixed(2)}
+  else
+    p No results found.
