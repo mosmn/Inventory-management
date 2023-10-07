@@ -153,5 +153,5 @@ exports.getSearchResults = asyncHandler(async (req, res) => {
 
   const items = await Item.find({ $text: { $search: searchQuery } }).exec();
 
-  res.render("searchResults", { items });
+  res.render("searchResults", { items, searchQuery });
 });

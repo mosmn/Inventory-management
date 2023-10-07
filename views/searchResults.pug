@@ -1,18 +1,26 @@
 extends layout
 
 block content
-  h1 Search Results
+  h1.search-title
+    | Search Results for: 
+    span(style="color: #ff6600;") #{searchQuery}
+
+
   if items.length > 0
-    ul
+    ul.results-list
       each item in items
-        li
-          a(href=item.url)
-            if item.image
-                img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name)
-            else
-                img(src='/images/default-image.jpg', alt=item.name)
-            h3= item.name
-            p.item-description= item.description
-            p.item-price $#{item.price.toFixed(2)}
+        li.result-item
+          a(href=item.url, class='result-link')
+            .info1
+                if item.image
+                    img(src=`data:image/jpeg;base64,${item.image.toString('base64')}`, alt=item.name, class='item-image')
+                else
+                    img(src='/images/default-image.jpg', alt=item.name, class='item-image')
+                .info2
+                    h3.item-name= item.name
+                    p.item-description= item.description
+                    p.item-price Price: $#{item.price.toFixed(2)}
+            p.item-stock Stock: #{item.number_in_stock}
+
   else
-    p No results found.
+    p.no-results No results found.
