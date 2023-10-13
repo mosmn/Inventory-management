@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-6.offset-md-3
+        h2 Sign Up
+        form(action='' method='POST')
+          .form-group
+            label(for="username") Username
+            input#username.form-control(type="text", name="username", required)
+
+          .form-group
+            label(for="password") Password
+            input#password.form-control(type="password", name="password", required)
+
+          button.btn.btn-primary(type="submit") Sign Up

@@ -4,7 +4,7 @@ Welcome to GrocifyPro, your go-to solution for efficient inventory management. T
 
 ## Demo
 
-![gif]()
+![gif](./gifs/demo.gif)
 
 [Live Demo](https://inventory-management-production-d2d7.up.railway.app/catalog)
 ## Project Overview
@@ -50,5 +50,3 @@ As a bonus feature, I tackled the challenge of adding and uploading images for e
 ## Conclusion
 
 GrocifyPro is now a robust inventory management system that simplifies the process of tracking items and categories for businesses. It allows users to view, add, update, and delete items and categories effortlessly. Plus, the image upload functionality adds a visual dimension to the inventory management process.
-
-I hope this README provides you with a clear overview of how GrocifyPro was developed and how each step contributed to building a functional and user-friendly inventory management application. Feel free to explore the codebase and adapt it to your specific needs. Happy coding!

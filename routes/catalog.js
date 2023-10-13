@@ -3,6 +3,7 @@ const router = express.Router();
 
 const category_controller = require("../controllers/categoryController");
 const item_controller = require("../controllers/itemController");
+const auth_controller = require("../controllers/authController");
 
 //category routes
 router.get("/", category_controller.homePage);
@@ -41,3 +42,9 @@ router.post("/item/:id/delete", item_controller.postDeleteItem);
 router.get("/search", item_controller.getSearchResults);
 
 module.exports = router;
+
+// authentification routes
+
+router.get("/sign-up", auth_controller.getSignUp);
+
+router.post("/sign-up", auth_controller.postSignUp);
