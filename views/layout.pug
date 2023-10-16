@@ -14,13 +14,14 @@ html
             input(type="search", name="q", placeholder="Search...")
             button(type="submit")
               img(src='/images/search-icon.png', alt='Search Icon')
-        .sign-up
-          a(href='/catalog/sign-up') Sign Up
-        .login
-          a(href='/catalog/login') Login
-        .profile-icon
-          a(href='#')
-            img(src='/images/profile-icon.png', alt='Profile Icon')
+        .right-side
+          .sign-up
+            a(href='/catalog/sign-up') Sign Up
+          .login
+            a(href='/catalog/login') Login
+          .profile-icon
+            a(href='#')
+              img(src='/images/profile-icon.png', alt='Profile Icon')
       block content
 
     footer
