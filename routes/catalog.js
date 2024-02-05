@@ -3,10 +3,11 @@ const router = express.Router();
 
 const category_controller = require("../controllers/categoryController");
 const item_controller = require("../controllers/itemController");
-const auth_controller = require("../controllers/authController");
+
+router.get("/", category_controller.landPage);
 
 //category routes
-router.get("/", category_controller.homePage);
+router.get("/dashboard", category_controller.homePage);
 
 router.get("/category/:id/items", category_controller.getItemsInCategory);
 
@@ -42,9 +43,3 @@ router.post("/item/:id/delete", item_controller.postDeleteItem);
 router.get("/search", item_controller.getSearchResults);
 
 module.exports = router;
-
-// authentification routes
-
-router.get("/sign-up", auth_controller.getSignUp);
-
-router.post("/sign-up", auth_controller.postSignUp);

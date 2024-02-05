@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Welcome to GrocifyPro
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
+  body
+    header
+      nav
+        ul
+          li: a(href="#about") About Us
+          li: a(href="#features") Features
+          li: a(href="#contact") Contact Us
+          li: a(href="/catalog/auth/log-in") Log In
+          li: a(href="/catalog/auth/sign-up") Sign Up
+
+    section#hero
+      h1 Welcome to GrocifyPro
+      p Your Ultimate Grocery Inventory Manager
+      a.cta-button(href="/catalog/auth/sign-up") Get Started
+
+    section#about
+      h2 About Us
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique mauris non libero varius.
+
+    section#features
+      h2 Features
+      ul
+        li Inventory Management
+        li Category Organization
+        li Item Details
+
+    section#contact
+      h2 Contact Us
+      p If you have any questions, feel free to contact us at info@grocifypro.com
+
+    section#signup
+      h2 Sign Up for GrocifyPro
+      form
+        label(for="email") Email:
+        input(type="email", id="email", name="email", required)
+        button.cta-button(type="submit") Sign Up
+
+    footer
+      p &copy; 2023 GrocifyPro. All rights reserved.

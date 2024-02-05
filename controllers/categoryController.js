@@ -9,14 +9,20 @@ const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
+exports.landPage = asyncHandler(async (req, res) => {
+  res.render("landPage");
+}
+);
+
 exports.homePage = asyncHandler(async (req, res) => {
   const categories = await Category.find({});
   const itemsAlmostOutOfStock = await Item.find({
     number_in_stock: { $lte: 30 },
   }).populate("category");
 
-  res.render("index", { categories, itemsAlmostOutOfStock });
+  res.render("index", { categories, itemsAlmostOutOfStock, user: req.user });
 });
+
 
 exports.getItemsInCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);

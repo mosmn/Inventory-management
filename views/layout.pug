@@ -6,7 +6,7 @@ html
   body
     .main-container
       header
-        a(href='/')
+        a(href='/catalog/dashboard')
           .logo
             img(src='/images/logo.png', alt='Your Logo')
         .search
@@ -15,13 +15,10 @@ html
             button(type="submit")
               img(src='/images/search-icon.png', alt='Search Icon')
         .right-side
-          .sign-up
-            a(href='/catalog/sign-up') Sign Up
-          .login
-            a(href='/catalog/login') Login
-          .profile-icon
-            a(href='#')
-              img(src='/images/profile-icon.png', alt='Profile Icon')
+            .profile-icon
+              a(href='#')
+                img(src='/images/profile-icon.png', alt='Profile Icon')
+            a(href='/catalog/auth/log-out') Logout
       block content
 
     footer

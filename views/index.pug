@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  .welcome
+    h1 Welcome to your dashboard, #{user && user.username || 'Guest'}!
   .cats
     each category in categories
       a(href=category.url, class='category-card')
