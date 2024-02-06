@@ -38,7 +38,6 @@ const limiter = RateLimit({
 
 app.use(limiter);
 
-// Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URI || process.env.MONGO_URL;
@@ -49,7 +48,6 @@ async function main() {
   console.log("Connected to MongoDB");
 }
 
-// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
