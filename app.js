@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("./config/passport");
 const logger = require("morgan");
+
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
@@ -17,6 +18,7 @@ const helmet = require("helmet");
 const app = express();
 
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
